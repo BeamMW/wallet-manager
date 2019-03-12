@@ -57,6 +57,15 @@
   width: 1000px;
 }
 
+.table-label {
+    color: #ffffff;
+}
+
+.receiver-cell,
+.receiver-cell-header {
+  min-width: 520px;
+}
+
 :host ::ng-deep.mat-header-row .mat-header-cell {
     font-weight: bolder !important;
     color: #ffffff;

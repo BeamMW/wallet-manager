@@ -31,16 +31,16 @@
     <ng-container matColumnDef="date">
       <mat-header-cell class="height-cell-date" *matHeaderCellDef> Date | time </mat-header-cell>
       <mat-cell class="height-cell" *matCellDef="let element">
-        <span class="desktop-label">
+        <span class="table-label">
           <!-- TODO: add date -->
         </span>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="address">
-      <mat-header-cell class="hash-cell-address" *matHeaderCellDef> Address </mat-header-cell>
-      <mat-cell class="hash-cell" *matCellDef="let element">
-        <span class="desktop-label">
+      <mat-header-cell class="receiver-cell-header" *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell class="receiver-cell" *matCellDef="let element">
+        <span class="table-label">
           {{element.receiver}}
         </span>
       </mat-cell>
@@ -49,7 +49,7 @@
     <ng-container matColumnDef="amount">
       <mat-header-cell class="age-cell-header" *matHeaderCellDef> Amount </mat-header-cell>
       <mat-cell class="age-cell" *matCellDef="let element">
-        <span class="desktop-label">
+        <span class="table-label">
           {{element.value}}
         </span>
       </mat-cell>
@@ -58,8 +58,8 @@
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <span class="desktop-label">
-          {{element.status}}
+        <span class="table-label">
+          {{element.statusName}}
         </span>
       </mat-cell>
     </ng-container>

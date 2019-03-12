@@ -26,7 +26,10 @@ export class WalletUtxoComponent implements OnInit {
     });
 
     this.dataService.loadUtxo().subscribe((list) => {
-      this.utxo_list = list;
+      this.utxo_list = list.map((item) => {
+        item.amount /= 100000000;
+        return item;
+      });
       this.utxo_loading = false;
     });
   }
