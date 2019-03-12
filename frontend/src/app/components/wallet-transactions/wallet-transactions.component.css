@@ -1,0 +1,63 @@
+.wallet-transactions-container {
+  background-color: rgb(30,23,44);
+  color: #ffffff;
+  width: 100%;
+  height: 100%;
+}
+
+.wallet-title {
+  margin: 50px 0;
+  float: left;
+  width: 1000px;
+}
+
+.receive-button {
+  width: 130px;
+  margin: 50px 20px 50px 0;
+  border-radius: 20px;
+  background-color: rgb(11,204,247);
+}
+
+.send-button {
+  width: 130px;
+  border-radius: 20px;
+  background-color: rgb(218,104,245);
+}
+
+.block-card {
+    margin: 0 0 19px 19px;
+    width:500px;
+    height: 300px;
+    float:left;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 10px;
+    background-color: rgb(52,46,65);
+    color: #ffffff;
+}
+
+.block-card-header-title {
+  margin-top: 50px;
+  color: #ffffff;
+}
+
+.block-card-content {
+  margin-left: 50px;
+}
+
+.transaction-title {
+  float: left;
+  width: 1000px;
+}
+
+.transactions-table {
+  background-color: rgb(52,46,65);
+  margin-left: 20px;
+  float: left;
+  width: 1000px;
+}
+
+:host ::ng-deep.mat-header-row .mat-header-cell {
+    font-weight: bolder !important;
+    color: #ffffff;
+}

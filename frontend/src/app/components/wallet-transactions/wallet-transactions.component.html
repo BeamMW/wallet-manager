@@ -1,0 +1,71 @@
+<div class="wallet-transactions-container">
+  <h1 class="wallet-title">Wallet</h1>
+  <button mat-raised-button class="receive-button">receive</button>
+  <button mat-raised-button class="send-button">send</button>
+
+  <div class="status-cards-container" *ngIf="!status_loading">
+    <mat-card class="block-card available-card">
+      <mat-card-header class="block-card-header">
+        <mat-card-subtitle class="block-card-header-title">Available:</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="block-card-content">
+        <h2 class="block-card-content-title">{{wallet_status.available}} BEAM</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="block-card height-card">
+      <mat-card-header class="block-card-header">
+        <mat-card-subtitle class="block-card-header-title">In progress:</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="block-card-content">
+        <h2 class="block-card-content-receiving">RECEIVING: {{wallet_status.receiving}}</h2>
+        <h2 class="block-card-content-sending">SENDING: {{wallet_status.sending}}</h2>
+        <h2 class="block-card-content-maturing">MATURING: {{wallet_status.maturing}}</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <h2 *ngIf="!transactions_loading" class="transaction-title">Transactions</h2>
+
+  <mat-table *ngIf="!transactions_loading" [dataSource]="wallet_transactions" class="transactions-table mat-elevation-z8">
+    <ng-container matColumnDef="date">
+      <mat-header-cell class="height-cell-date" *matHeaderCellDef> Date | time </mat-header-cell>
+      <mat-cell class="height-cell" *matCellDef="let element">
+        <span class="desktop-label">
+          <!-- TODO: add date -->
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell class="hash-cell-address" *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell class="hash-cell" *matCellDef="let element">
+        <span class="desktop-label">
+          {{element.receiver}}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell class="age-cell-header" *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell class="age-cell" *matCellDef="let element">
+        <span class="desktop-label">
+          {{element.value}}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="desktop-label">
+          {{element.status}}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row class="transactions-table-header" *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row class="transactions-table-row" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

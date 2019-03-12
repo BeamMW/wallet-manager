@@ -1,0 +1,20 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav class="sidenav-container" mode="side" opened>
+     <mat-nav-list>
+
+      <a *ngFor="let item of walletRoutes"
+         mat-list-item
+         routerLinkActive
+         #routerLinkActiveInstance="routerLinkActive"
+         [class.list-item-active]="routerLinkActiveInstance.isActive"
+         [routerLink]="[item.route]"
+         class="sidenav-list-item">
+<!-- <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon> !-->
+        {{item.title}}
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
