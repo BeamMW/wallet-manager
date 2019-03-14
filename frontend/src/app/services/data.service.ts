@@ -14,15 +14,15 @@ export class DataService {
   constructor(private http: HttpClient) {
   }
 
-  loadWalletStatus() {
-    return this.http.get<Wallet>(this.API_BASE + '/wallet_status/');
+  loadWalletStatus(port) {
+    return this.http.get<Wallet>(this.API_BASE + '/wallet_status/?port=' + port);
   }
 
-  loadTxList() {
-    return this.http.get<Transaction[]>(this.API_BASE + '/tx_list/');
+  loadTxList(port) {
+    return this.http.get<Transaction[]>(this.API_BASE + '/tx_list/?port=' + port);
   }
 
-  loadUtxo() {
-    return this.http.get<Utxo[]>(this.API_BASE + '/get_utxo/');
+  loadUtxo(port) {
+    return this.http.get<Utxo[]>(this.API_BASE + '/get_utxo/?port=' + port);
   }
 }

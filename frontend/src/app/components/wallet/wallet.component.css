@@ -1,3 +1,7 @@
+.sidenav-list {
+  padding: 0;
+}
+
 .example-container {
   position: absolute;
   top: 0;
@@ -16,4 +20,28 @@
   width: 150px;
   margin-top: 5px;
   color: #ffffff;
+}
+
+.logo-image {
+  padding: 50px 15px 68px 15px;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.sidenav-image {
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+
+}
+
+.sidenav-image-active {
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+}
+
+.sidenav-list-item {
+  margin-bottom: 20px;
 }

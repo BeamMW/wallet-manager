@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../services/data.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-wallet-transactions',
@@ -10,7 +11,7 @@ import {DataService} from '../../services/data.service';
 export class WalletTransactionsComponent implements OnInit {
 
   displayedColumns: string[] = ['date', 'address', 'amount', 'status'];
-
+  port: string;
   statuses = [
     {id: 0, name: 'Pending'},
     {id: 1, name: 'InProgress'},
@@ -23,13 +24,20 @@ export class WalletTransactionsComponent implements OnInit {
 
   wallet_transactions: any;
   wallet_status: any;
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.status_loading = true;
     this.transactions_loading = true;
 
-    this.dataService.loadWalletStatus().subscribe((status) => {
+    this.port = this.route.snapshot.parent.params.port;
+    /*this.route.params.subscribe( (params) => {
+      let sd =123;
+   });*/
+
+    this.dataService.loadWalletStatus(this.port).subscribe((status) => {
       this.wallet_status = status;
       this.wallet_status.available /= 100000000;
       this.wallet_status.receiving /= 100000000;
@@ -38,7 +46,7 @@ export class WalletTransactionsComponent implements OnInit {
       this.status_loading = false;
     });
 
-    this.dataService.loadTxList().subscribe((list) => {
+    this.dataService.loadTxList(this.port).subscribe((list) => {
       this.wallet_transactions = list.map((item) => {
         item.statusName = this.statuses.find(status => status.id === item.status).name;
         item.value /= 100000000;

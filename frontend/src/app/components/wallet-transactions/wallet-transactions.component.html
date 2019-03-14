@@ -1,7 +1,17 @@
 <div class="wallet-transactions-container">
   <h1 class="wallet-title">Wallet</h1>
-  <button mat-raised-button class="receive-button">receive</button>
-  <button mat-raised-button class="send-button">send</button>
+  <button mat-raised-button class="receive-button">
+    <img src="../../../assets/img/icon-receive-blue.png"
+     srcset="../../../assets/img/icon-receive-blue@2x.png 2x,
+             ../../../assets/img/icon-receive-blue@3x.png 3x"
+     class="icon-receive-blue">
+    receive</button>
+  <button mat-raised-button class="send-button">
+    <img src="../../../assets/img/icon-send-blue.png"
+     srcset="../../../assets/img/icon-send-blue@2x.png 2x,
+             ../../../assets/img/icon-send-blue@3x.png 3x"
+     class="icon-send-blue">
+    send</button>
 
   <div class="status-cards-container" *ngIf="!status_loading">
     <mat-card class="block-card available-card">
@@ -63,7 +73,6 @@
         </span>
       </mat-cell>
     </ng-container>
-
 
     <mat-header-row class="transactions-table-header" *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row class="transactions-table-row" *matRowDef="let row; columns: displayedColumns;"></mat-row>

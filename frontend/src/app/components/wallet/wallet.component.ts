@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 interface ROUTE {
   icon?: string;
@@ -12,26 +13,35 @@ interface ROUTE {
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit {
-
+  port: string;
   walletRoutes: ROUTE[] = [
     {
-      icon: 'wallet_icon',
-      route: '',
-      title: 'Wallet',
+      icon: 'icon-wallet',
+      route: 'transactions',
+      title: 'Wallet'
     }, {
-      icon: 'addresses_icon',
+      icon: 'icon-addressbook',
       route: 'addresses',
-      title: 'Addresses',
+      title: 'Addresses'
     }, {
-      icon: 'utxo_icon',
+      icon: 'icon-utxo',
       route: 'utxo',
-      title: 'UTXO',
+      title: 'UTXO'
     }
   ];
+  activeSidenavItem = this.walletRoutes[0];
 
-  constructor() { }
+  constructor(private router: Router,
+              private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  sidenavItemClicked(item) {
+    this.activeSidenavItem = item;
+    this.router.navigate([item.route], {relativeTo: this.route});
   }
 
+  ngOnInit() {
+   this.route.params.subscribe( (params) => {
+      this.port = params.port;
+   });
+  }
 }

@@ -10,6 +10,8 @@ export class Wallet implements Deserializable {
   maturing: number;
   locked: number;
   difficulty: number;
+  name: string;
+  port: string;
 
   deserialize(input: any) {
     Object.assign(this, input);

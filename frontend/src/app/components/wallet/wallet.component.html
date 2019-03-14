@@ -1,16 +1,20 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav class="sidenav-container" mode="side" opened>
-     <mat-nav-list>
-      <img class="logo-title" src="../../../assets/logo.svg" width=48 height=42 alt="">
+     <mat-nav-list class="sidenav-list">
+      <img class="logo-image" src="../../../assets/img/logo.png" alt="">
       <a *ngFor="let item of walletRoutes"
          mat-list-item
-         routerLinkActive
-         #routerLinkActiveInstance="routerLinkActive"
-         [class.list-item-active]="routerLinkActiveInstance.isActive"
-         [routerLink]="[item.route]"
+         (click)="sidenavItemClicked(item)"
          class="sidenav-list-item">
-<!-- <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon> !-->
-        {{item.title}}
+        <img *ngIf="item.title !== activeSidenavItem.title" class="sidenav-image"
+              [attr.src]="'../../../assets/img/' + item.icon + '.png'"
+              [attr.srcset]="'../../../assets/img/' + item.icon
+              + '@2x.png 2x, ../../../assets/img/' + item.icon + '@3x.png 3x'" alt="">
+
+        <img *ngIf="item.title == activeSidenavItem.title" class="sidenav-image-active"
+              [attr.src]="'../../../assets/img/' + item.icon + '-active.png'"
+              [attr.srcset]="'../../../assets/img/' + item.icon
+              + '-active@2x.png 2x, ../../../assets/img/' + item.icon + '-active@3x.png 3x'" alt="">
       </a>
     </mat-nav-list>
   </mat-sidenav>
