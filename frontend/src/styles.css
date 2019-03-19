@@ -5,4 +5,4 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "SFUIDisplay", sans-serif; }
+body, div, span, html { font-family: Roboto, "SFUIDisplay", sans-serif; }

@@ -12,6 +12,12 @@
   vertical-align: middle;
 }
 
+.remove-wallet-icon {
+  float: right;
+  margin-top: 45px;
+  margin-right: 45px;
+}
+
 .example-spacer {
   flex: 1 1 auto;
 }
@@ -53,7 +59,7 @@
 
 .block-card-header-title {
   color: #ffffff;
-  margin-top: 50px;
+  margin-top: 40px;
   font-size: 30px;
 }
 

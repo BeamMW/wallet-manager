@@ -33,6 +33,14 @@ export class WalletManagerComponent implements OnInit {
     );
   }
 
+  removeWallet(event, wallet) {
+    event.stopPropagation();
+    this.dataService.deleteWallet(wallet.port).subscribe(() => {
+       const walletToRemove = this.wallets.find(walletItem => walletItem.port === wallet.status);
+       this.wallets.splice( this.wallets.indexOf(walletToRemove), 1 );
+    });
+  }
+
   openDialog() {
     const dialogRef = this.dialog.open(WalletManagerDialogComponent, {
       width: '250px',
@@ -41,17 +49,29 @@ export class WalletManagerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.dataService.loadWalletStatus(result.value.port).subscribe((status) => {
-          status.name = result.value.name;
-          status.port = result.value.port;
-          this.wallets.push(status);
-        },  error => {});
+        this.dataService.addWallet({'name': result.value.name, 'port': result.value.port}).subscribe(() => {
+          this.dataService.loadWalletStatus(result.value.port).subscribe((status) => {
+            status.name = result.value.name;
+            status.port = result.value.port;
+            this.wallets.push(status);
+          },  error => {});
+        });
       }
     });
   }
 
   ngOnInit() {
     this.wallets = [];
+
+    this.dataService.loadWalletsList().subscribe((list) => {
+      list.map((item) => {
+        this.dataService.loadWalletStatus(item.port).subscribe((status) => {
+          status.name = item.name;
+          status.port = item.port;
+          this.wallets.push(status);
+        },  error => {});
+      });
+    });
   }
 }
 

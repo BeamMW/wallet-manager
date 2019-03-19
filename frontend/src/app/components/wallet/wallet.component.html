@@ -1,7 +1,7 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav class="sidenav-container" mode="side" opened>
      <mat-nav-list class="sidenav-list">
-      <img class="logo-image" src="../../../assets/img/logo.png" alt="">
+      <img class="logo-image" (click)="toManager()" src="../../../assets/img/logo.png" alt="">
       <a *ngFor="let item of walletRoutes"
          mat-list-item
          (click)="sidenavItemClicked(item)"

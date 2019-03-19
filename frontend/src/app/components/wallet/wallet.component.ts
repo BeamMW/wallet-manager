@@ -39,6 +39,12 @@ export class WalletComponent implements OnInit {
     this.router.navigate([item.route], {relativeTo: this.route});
   }
 
+  toManager() {
+    this.router.navigate(
+      ['']
+    );
+  }
+
   ngOnInit() {
    this.route.params.subscribe( (params) => {
       this.port = params.port;

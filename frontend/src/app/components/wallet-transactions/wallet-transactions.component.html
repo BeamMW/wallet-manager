@@ -1,5 +1,9 @@
 <div class="wallet-transactions-container">
-  <h1 class="wallet-title">Wallet</h1>
+  <div class="wallet-title-container">
+    <h1 class="wallet-title">Wallet</h1>
+    <div class="wallet-status"></div>
+    <span class="status-title">online (testnet)</span>
+  </div>
   <button mat-raised-button class="receive-button">
     <img src="../../../assets/img/icon-receive-blue.png"
      srcset="../../../assets/img/icon-receive-blue@2x.png 2x,
@@ -16,21 +20,22 @@
   <div class="status-cards-container" *ngIf="!status_loading">
     <mat-card class="block-card available-card">
       <mat-card-header class="block-card-header">
-        <mat-card-subtitle class="block-card-header-title">Available:</mat-card-subtitle>
+        <mat-card-subtitle class="block-card-header-title">Available</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="block-card-content">
-        <h2 class="block-card-content-title">{{wallet_status.available}} BEAM</h2>
+        <span class="block-card-content-available">{{wallet_status.available}}</span>
+        <span class="block-card-content-beam">BEAM</span>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="block-card height-card">
       <mat-card-header class="block-card-header">
-        <mat-card-subtitle class="block-card-header-title">In progress:</mat-card-subtitle>
+        <mat-card-subtitle class="block-card-header-title">In progress</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="block-card-content">
-        <h2 class="block-card-content-receiving">RECEIVING: {{wallet_status.receiving}}</h2>
-        <h2 class="block-card-content-sending">SENDING: {{wallet_status.sending}}</h2>
-        <h2 class="block-card-content-maturing">MATURING: {{wallet_status.maturing}}</h2>
+        <h2 class="block-card-content-receiving">RECEIVING {{wallet_status.receiving}}</h2>
+        <h2 class="block-card-content-sending">SENDING {{wallet_status.sending}}</h2>
+        <h2 class="block-card-content-maturing">MATURING {{wallet_status.maturing}}</h2>
       </mat-card-content>
     </mat-card>
   </div>

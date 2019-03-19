@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
+const GROTHS_IN_BEAM = 100000000;
+
 @Component({
   selector: 'app-wallet-utxo',
   templateUrl: './wallet-utxo.component.html',
@@ -33,7 +35,7 @@ export class WalletUtxoComponent implements OnInit {
 
     this.dataService.loadUtxo(this.port).subscribe((list) => {
       this.utxo_list = list.map((item) => {
-        item.amount /= 100000000;
+        item.amount /= GROTHS_IN_BEAM;
         return item;
       });
       this.utxo_loading = false;
