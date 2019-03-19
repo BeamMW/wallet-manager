@@ -4,5 +4,5 @@
   src: url(assets/fonts/SFUIDisplay.otf) format("opentype");
 }
 
-html, body { height: 100%; }
+html, body { height: 100%; margin: 0;}
 body, div, span, html { font-family: Roboto, "SFUIDisplay", sans-serif; }

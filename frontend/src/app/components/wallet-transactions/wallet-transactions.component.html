@@ -1,21 +1,19 @@
 <div class="wallet-transactions-container">
   <div class="wallet-title-container">
-    <h1 class="wallet-title">Wallet</h1>
-    <div class="wallet-status"></div>
-    <span class="status-title">online (testnet)</span>
+    <div class="wallet-info">
+      <h1 class="wallet-title">Wallet</h1>
+      <div class="status-icon"></div>
+      <span class="status-title">online (testnet)</span>
+    </div>
+    <button mat-raised-button class="receive-button">
+      <img src="../../../assets/img/icon-receive-blue.png" class="icon-receive-blue">
+      receive
+    </button>
+    <button mat-raised-button class="send-button">
+      <img src="../../../assets/img/icon-send-blue.png" class="icon-send-blue">
+      send
+    </button>
   </div>
-  <button mat-raised-button class="receive-button">
-    <img src="../../../assets/img/icon-receive-blue.png"
-     srcset="../../../assets/img/icon-receive-blue@2x.png 2x,
-             ../../../assets/img/icon-receive-blue@3x.png 3x"
-     class="icon-receive-blue">
-    receive</button>
-  <button mat-raised-button class="send-button">
-    <img src="../../../assets/img/icon-send-blue.png"
-     srcset="../../../assets/img/icon-send-blue@2x.png 2x,
-             ../../../assets/img/icon-send-blue@3x.png 3x"
-     class="icon-send-blue">
-    send</button>
 
   <div class="status-cards-container" *ngIf="!status_loading">
     <mat-card class="block-card available-card">
@@ -33,53 +31,69 @@
         <mat-card-subtitle class="block-card-header-title">In progress</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="block-card-content">
-        <h2 class="block-card-content-receiving">RECEIVING {{wallet_status.receiving}}</h2>
-        <h2 class="block-card-content-sending">SENDING {{wallet_status.sending}}</h2>
-        <h2 class="block-card-content-maturing">MATURING {{wallet_status.maturing}}</h2>
+        <div class="card-container">
+          <span class="receiving-container">
+            <h2 class="title">RECEIVING</h2>
+            <div class="value">{{wallet_status.receiving}}</div>
+            <img src="../../../assets/img/icon-receiving.svg" class="icon">
+          </span>
+          <span class="sending-container">
+            <h2 class="title">SENDING</h2>
+            <div class="value">{{wallet_status.sending}}</div>
+            <img src="../../../assets/img/icon-sending.svg" class="icon">
+          </span>
+          <span class="maturing-container">
+            <h2 class="title">MATURING</h2>
+            <div class="value">{{wallet_status.maturing}}</div>
+            <img src="../../../assets/img/icon-maturing.svg" class="icon">
+          </span>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
 
-  <h2 *ngIf="!transactions_loading" class="transaction-title">Transactions</h2>
+  <div class="table-container">
+    <h2 *ngIf="!transactions_loading" class="transaction-title">Transactions</h2>
 
-  <mat-table *ngIf="!transactions_loading" [dataSource]="wallet_transactions" class="transactions-table mat-elevation-z8">
-    <ng-container matColumnDef="date">
-      <mat-header-cell class="height-cell-date" *matHeaderCellDef> Date | time </mat-header-cell>
-      <mat-cell class="height-cell" *matCellDef="let element">
-        <span class="table-label">
-          <!-- TODO: add date -->
-        </span>
-      </mat-cell>
-    </ng-container>
+    <mat-table *ngIf="!transactions_loading" [dataSource]="wallet_transactions" class="transactions-table mat-elevation-z8">
+      <ng-container matColumnDef="date">
+        <mat-header-cell class="height-cell-date" *matHeaderCellDef> Date | time </mat-header-cell>
+        <mat-cell class="height-cell" *matCellDef="let element">
+          <span class="table-label">
+            <!-- TODO: add date -->
+          </span>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="address">
-      <mat-header-cell class="receiver-cell-header" *matHeaderCellDef> Address </mat-header-cell>
-      <mat-cell class="receiver-cell" *matCellDef="let element">
-        <span class="table-label">
-          {{element.receiver}}
-        </span>
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="address">
+        <mat-header-cell class="receiver-cell-header" *matHeaderCellDef> Address </mat-header-cell>
+        <mat-cell class="receiver-cell" *matCellDef="let element">
+          <span class="table-label">
+            {{element.receiver}}
+          </span>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="amount">
-      <mat-header-cell class="age-cell-header" *matHeaderCellDef> Amount </mat-header-cell>
-      <mat-cell class="age-cell" *matCellDef="let element">
-        <span class="table-label">
-          {{element.value}}
-        </span>
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="amount">
+        <mat-header-cell class="age-cell-header" *matHeaderCellDef> Amount </mat-header-cell>
+        <mat-cell class="age-cell" *matCellDef="let element">
+          <span class="table-label">
+            {{element.value}}
+          </span>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <span class="table-label">
-          {{element.statusName}}
-        </span>
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell class="header-row" *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="table-label">
+            {{element.statusName}}
+          </span>
+        </mat-cell>
+      </ng-container>
 
-    <mat-header-row class="transactions-table-header" *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row class="transactions-table-row" *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+      <mat-header-row class="transactions-table-header" *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row class="transactions-table-row" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 </div>
