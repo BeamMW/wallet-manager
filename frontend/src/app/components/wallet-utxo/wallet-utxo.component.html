@@ -1,8 +1,8 @@
 <div class="wallet-utxo-container">
-  <h1 class="utxo-title">UTXO</h1>
+  <div class="utxo-title-container">
+    <app-status-title class="utxo-title-element" [title]="'UTXO'"></app-status-title>
 
-  <div class="status-cards-container" *ngIf="!status_loading">
-    <mat-card class="block-card status-card">
+    <mat-card class="block-card height-card" *ngIf="!status_loading">
         <mat-card-header class="block-card-header">
           <mat-card-subtitle class="block-card-header-title">Blockchain Height:</mat-card-subtitle>
         </mat-card-header>
@@ -11,14 +11,14 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="block-card status-card">
+    <mat-card class="block-card hash-card" *ngIf="!status_loading">
         <mat-card-header class="block-card-header">
           <mat-card-subtitle class="block-card-header-title">Last block hash:</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="block-card-content">
           <h2 class="block-card-content-title">{{wallet_status.current_state_hash | slice:0:20}} </h2>
         </mat-card-content>
-    </mat-card>
+      </mat-card>
   </div>
 
   <mat-table *ngIf="!utxo_loading" [dataSource]="utxo_list" class="utxo-table mat-elevation-z8">

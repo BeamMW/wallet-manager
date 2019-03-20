@@ -5,17 +5,30 @@
   height: 100%;
 }
 
-.utxo-title {
-  margin: 50px 0;
-  float: left;
-  width: 500px;
+.utxo-title-container {
+    display: grid;
+    grid-template-columns: 30px 535px auto 10px auto 30px;
+}
+
+.utxo-title-element {
+    grid-column-start: 2;
+    grid-column-end: 2;
+}
+
+.height-card {
+    margin-top: 50px;
+    grid-column-start: 3;
+    grid-column-end: 3;
+}
+
+.hash-card {
+    margin-top: 50px;
+    grid-column-start: 5;
+    grid-column-end: 5;
 }
 
 .block-card {
-    margin: 0 0 19px 19px;
-    width:200px;
-    height: 100px;
-    float:left;
+    height: 63px;
     padding: 0;
     box-shadow: none;
     border-radius: 10px;
@@ -33,13 +46,8 @@
   margin-left: 20px
 }
 
-.status-cards-container {
-  float: left;
-  margin-top: 25px;
-  margin-left: 50px;
-}
-
 .utxo-table {
+  margin-top: 20px;
   background-color: rgb(52,46,65);
   margin-left: 20px;
   float: left;

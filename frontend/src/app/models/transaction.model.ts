@@ -12,6 +12,8 @@ export class Transaction implements Deserializable {
   height: number;
   confirmations: number;
   statusName: string;
+  show: boolean;
+  tableData: any;
 
   deserialize(input: any) {
     Object.assign(this, input);

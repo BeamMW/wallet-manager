@@ -29,8 +29,9 @@ def create_address(request):
     port = request.GET['port']
     r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
                       json={'jsonrpc': '2.0', 'id': 1, 'method': 'create_address', 'params': {'lifetime': 24}})
+    result = json.loads(r.text)
 
-    return Response(json.loads(r.text), status=HTTP_200_OK)
+    return Response(result['result'], status=HTTP_200_OK)
 
 
 @api_view(['GET'])

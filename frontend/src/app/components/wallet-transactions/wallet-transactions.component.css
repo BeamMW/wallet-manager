@@ -4,6 +4,7 @@
     width: 100%;
     height: 100%;
     min-width: 1000px;
+    overflow: auto;
 }
 
 .wallet-title-container {
@@ -11,41 +12,9 @@
     grid-template-columns: 30px auto 138px 20px 138px 30px;
 }
 
-.wallet-info {
+.wallet-title-element {
     grid-column-start: 2;
     grid-column-end: 2;
-}
-
-.wallet-title {
-    margin: 50px 0 0 30px;
-    font-size: 36px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-}
-
-.status-icon {
-    width: 10px;
-    height: 10px;
-    margin-top: 7px;
-    margin-left: 30px;
-    float: left;
-    box-shadow: 0 0 10px 0 rgba(0, 246, 210, 0.7);
-    background-color: #00f6d2;
-    border-radius: 50px;
-}
-
-.status-title {
-    margin-left: 8px;
-    font-size: 12px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #8da1ad;
 }
 
 .status-cards-container {
@@ -139,7 +108,7 @@
 
 .card-container {
     display: grid;
-    grid-template-columns: 30px auto auto auto 30px;
+    grid-template-columns: 30px repeat(3, auto) 30px;
 }
 
 .table-container {
@@ -164,6 +133,8 @@
 }
 
 .transactions-table {
+    overflow: auto;
+    max-height: 46vh;
     grid-row-start: 2;
     grid-row-end: 2;
     grid-column-start: 2;
@@ -246,20 +217,103 @@
     margin-top: 13px;
 }
 
-.mat-row:nth-child(even){
-    background-color: rgb(30,23,44);
+.transactions-table .transactions-table-row:nth-child(n+1){
+    background-color: rgb(41,34,54);
 }
 
-.mat-row:nth-child(odd){
+.transactions-table .transactions-table-row:nth-child(3n+1){
     background-color: rgb(52,46,65);
 }
 
-.transactions-table-header {
+.transactions-table .transactions-table-header {
     background-color: rgb(52,46,65);
+}
+
+.mat-row,
+.transactions-table-row {
+    position: relative;
+    border: none;
+}
+
+.transactions-table-row:not(.expanded) {
+    cursor: pointer;
+    border: none;
+}
+
+.transactions-table-row.expanded {
+    border: none;
+}
+
+.mat-column-expandedDetail {
+    height: 190px;
 }
 
 .table-label {
     color: #ffffff;
+}
+
+.icon-header,
+.icon-cell {
+    max-width: 65px;
+}
+
+.actions-header,
+.actions-cell {
+    max-width: 10px;
+}
+
+.expanded-info-container {
+    display: grid;
+    grid-template-columns: 175px 600px;
+}
+
+.details-table {
+  border: none;
+  background-color: rgb(62,56,74);
+}
+
+.details-table .mat-row {
+    min-height: 10px;
+}
+
+.details-table .info-header-row,
+.details-table .mat-header-cell{
+    font-family: Roboto, "SFUIDisplay", sans-serif;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+.details-table .name-cell {
+    font-family: Roboto, "SFUIDisplay", sans-serif;
+    color: #8da1ad;
+    max-width: 160px;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+}
+
+.details-table .value-cell {
+    font-family: Roboto, "SFUIDisplay", sans-serif;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+.expand-table-row {
+    background-color: rgb(62,56,74);
 }
 
 .receiver-cell,

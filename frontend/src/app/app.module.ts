@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,8 @@ import { WalletAddressesComponent } from './components/wallet-addresses/wallet-a
 import { WalletUtxoComponent } from './components/wallet-utxo/wallet-utxo.component';
 import { WalletTransactionsComponent } from './components/wallet-transactions/wallet-transactions.component';
 import { WalletManagerComponent, WalletManagerDialogComponent } from './components/wallet-manager/wallet-manager.component';
+import { ReceiveComponent } from './components/receive/receive.component';
+import { SendComponent } from './components/send/send.component';
 
 @NgModule({
   entryComponents: [
@@ -42,7 +45,9 @@ import { WalletManagerComponent, WalletManagerDialogComponent } from './componen
     WalletUtxoComponent,
     WalletTransactionsComponent,
     WalletManagerComponent,
-    WalletManagerDialogComponent
+    WalletManagerDialogComponent,
+    ReceiveComponent,
+    SendComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,7 @@ import { WalletManagerComponent, WalletManagerDialogComponent } from './componen
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     // Material
     MatExpansionModule,
     MatButtonModule,

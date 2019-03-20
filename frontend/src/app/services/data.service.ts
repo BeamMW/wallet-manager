@@ -31,6 +31,10 @@ export class DataService {
     return this.http.delete(this.API_BASE + '/wallets/' + port + '/', this.HTTP_OPTIONS);
   }
 
+  createAddress(port) {
+    return this.http.get(this.API_BASE + '/create_address/?port=' + port);
+  }
+
   loadWalletStatus(port) {
     return this.http.get<Wallet>(this.API_BASE + '/wallet_status/?port=' + port);
   }

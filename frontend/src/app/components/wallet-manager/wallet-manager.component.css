@@ -18,6 +18,10 @@
   margin-right: 45px;
 }
 
+.logo-title {
+  margin-left: 20px;
+}
+
 .example-spacer {
   flex: 1 1 auto;
 }
