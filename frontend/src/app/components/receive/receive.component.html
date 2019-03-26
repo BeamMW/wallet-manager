@@ -7,7 +7,29 @@
     <div class="receive-items">
       <div>My address</div>
       <input autocomplete="off" class="receive-address" disabled
-             type="search" #searchInput id="searchInput"/>
+             type="search" #addressInput id="addressInput"/>
+      <div class="expires-container">
+        Expires:
+        <span class="expires-selector">
+          <span class="time-selected" (click)="showTypesOptions($event)">
+            <span>{{selectedExpireTime.name}}</span>
+            <img src="../../../assets/img/arrow-down-small.png"
+                 class="arrow-down-small">
+          </span>
+          <div class="time-options" *ngIf="isExpiresVisible">
+            <ul>
+              <li class="time-item" *ngFor="let p of blocksChartTypes"
+                  [class.selected]="p.isSelected"
+                  (click)="expireTimeChanged(p)">
+                <span> {{p.name}} </span>
+              </li>
+            </ul>
+          </div>
+        </span>
+      </div>
+      <div>Comment</div>
+      <input autocomplete="off" class="receive-comment"
+             type="search" #commentInput id="commentInput"/>
     </div>
   </div>
 </section>

@@ -24,11 +24,37 @@ class WalletViewSet(viewsets.ModelViewSet):
         serializer = WalletSerializer(wallets, many=True)
         return Response(serializer.data)
 
+
 @api_view(['GET'])
 def create_address(request):
     port = request.GET['port']
     r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
-                      json={'jsonrpc': '2.0', 'id': 1, 'method': 'create_address', 'params': {'lifetime': 24}})
+                      json={'jsonrpc': '2.0',
+                            'id': 1,
+                            'method': 'create_address',
+                            'params': {
+                                'lifetime': 24
+                            }})
+    result = json.loads(r.text)
+
+    return Response(result['result'], status=HTTP_200_OK)
+
+@api_view(['GET'])
+def edit_address(request):
+    port = request.GET['port']
+    address = request.GET['address']
+    comment = request.GET['comment']
+    expiration = request.GET['expiration']
+
+    r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0',
+                            'id': 8,
+                            'method': 'addr_list',
+                            'params': {
+                                'address': address,
+                                'comment': comment,
+                                'expiration': expiration
+                            }})
     result = json.loads(r.text)
 
     return Response(result['result'], status=HTTP_200_OK)
@@ -55,10 +81,35 @@ def get_utxo(request):
 
 
 @api_view(['GET'])
+def get_addr_list(request):
+    port = request.GET['port']
+    r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0', 'id': 8, 'method': 'addr_list', 'params': {'own': True}})
+    result = json.loads(r.text)
+
+    return Response(result['result'], status=HTTP_200_OK)
+
+
+@api_view(['GET'])
 def get_tx_list(request):
     port = request.GET['port']
     r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
                       json={'jsonrpc': '2.0', 'id': 8, 'method': 'tx_list'})
+    result = json.loads(r.text)
+
+    return Response(result['result'], status=HTTP_200_OK)
+
+@api_view(['GET'])
+def tx_cancel(request):
+    port = request.GET['port']
+    tx_id = request.GET['tx_id']
+    r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0',
+                            'id': 4,
+                            'method': 'tx_cancel',
+                            'params': {
+                                'txId': tx_id
+                            }})
     result = json.loads(r.text)
 
     return Response(result['result'], status=HTTP_200_OK)

@@ -35,12 +35,22 @@ export class DataService {
     return this.http.get(this.API_BASE + '/create_address/?port=' + port);
   }
 
+  editAddress(port, address, expiration, comment) {
+    return this.http.get(this.API_BASE + '/edit_address/?port=' + port +
+      '&address=' + address + '&comment=' + comment + '&expiration=' + expiration);
+  }
+
   loadWalletStatus(port) {
     return this.http.get<Wallet>(this.API_BASE + '/wallet_status/?port=' + port);
   }
 
   loadTxList(port) {
     return this.http.get<Transaction[]>(this.API_BASE + '/tx_list/?port=' + port);
+  }
+
+  txCancel(port, txId) {
+    return this.http.get<Transaction[]>(this.API_BASE + '/tx_list/?port=' + port +
+      '&tx_id=' + txId);
   }
 
   loadUtxo(port) {

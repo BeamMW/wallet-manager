@@ -34,13 +34,31 @@
   height: 28px;
   width: 28px;
   object-fit: contain;
-
+  border: none;
 }
 
-.sidenav-image-active {
-  height: 28px;
-  width: 28px;
-  object-fit: contain;
+.icon-wallet {
+  content:url(../../../assets/img/icon-wallet.svg);
+}
+
+.icon-wallet.active {
+  content:url(../../../assets/img/icon-wallet-active.svg);
+}
+
+.icon-addressbook {
+  content:url(../../../assets/img/icon-addressbook.svg);
+}
+
+.icon-addressbook.active {
+  content:url(../../../assets/img/icon-addressbook-active.svg);
+}
+
+.icon-utxo {
+  content:url(../../../assets/img/icon-utxo.svg);
+}
+
+.icon-utxo.active {
+  content:url(../../../assets/img/icon-utxo-active.svg);
 }
 
 .sidenav-list-item {

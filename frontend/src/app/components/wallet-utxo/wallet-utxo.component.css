@@ -1,8 +1,8 @@
 .wallet-utxo-container {
-  background-color: rgb(30,23,44);
-  color: #ffffff;
-  width: 100%;
-  height: 100%;
+    background-color: rgb(30,23,44);
+    color: #ffffff;
+    width: 100%;
+    height: 100%;
 }
 
 .utxo-title-container {
@@ -37,25 +37,27 @@
 }
 
 .block-card-header-title {
-  margin-top: 10px;
-  color: #ffffff;
+    margin-top: 10px;
+    color: #ffffff;
+    margin-bottom: 4px;
 }
 
 .block-card-content-title {
-  font-size: 15px;
-  margin-left: 20px
+    font-size: 15px;
+    margin-left: 17px;
+    color: #00f6d2;
 }
 
 .utxo-table {
-  margin-top: 20px;
-  background-color: rgb(52,46,65);
-  margin-left: 20px;
-  float: left;
-  width: 1000px;
+    margin-top: 20px;
+    background-color: rgb(52,46,65);
+    margin-left: 20px;
+    float: left;
+    width: 1000px;
 }
 
 .table-label {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 :host ::ng-deep.mat-header-row .mat-header-cell {

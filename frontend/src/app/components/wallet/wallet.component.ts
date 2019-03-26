@@ -46,6 +46,12 @@ export class WalletComponent implements OnInit {
   }
 
   ngOnInit() {
+  const splittedUrl = this.router.url.split('/');
+  const activeRoute = this.walletRoutes.find(routeItem =>
+    routeItem.route === splittedUrl[splittedUrl.length - 1]);
+
+  this.activeSidenavItem = activeRoute !== undefined ? activeRoute : this.walletRoutes[0];
+
    this.route.params.subscribe( (params) => {
       this.port = params.port;
    });

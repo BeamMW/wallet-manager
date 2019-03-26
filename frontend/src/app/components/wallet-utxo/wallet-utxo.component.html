@@ -7,7 +7,7 @@
           <mat-card-subtitle class="block-card-header-title">Blockchain Height:</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="block-card-content">
-          <h2 class="block-card-content-title">{{wallet_status.current_height}} </h2>
+          <span class="block-card-content-title">{{wallet_status.current_height}} </span>
         </mat-card-content>
     </mat-card>
 
@@ -16,7 +16,7 @@
           <mat-card-subtitle class="block-card-header-title">Last block hash:</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="block-card-content">
-          <h2 class="block-card-content-title">{{wallet_status.current_state_hash | slice:0:20}} </h2>
+          <span class="block-card-content-title">{{wallet_status.current_state_hash | slice:0:20}} </span>
         </mat-card-content>
       </mat-card>
   </div>

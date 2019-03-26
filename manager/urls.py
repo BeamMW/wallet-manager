@@ -12,6 +12,9 @@ urlpatterns = [
     url(r'^create_address/$', create_address),
     url(r'^wallet_status/$', get_wallet_status),
     url(r'^tx_list/$', get_tx_list),
+    url(r'^tx_cancel/$', tx_cancel),
     url(r'^get_utxo/$', get_utxo),
+    url(r'^get_addr_list/$', get_addr_list),
+    url(r'^edit_address/$', edit_address),
     url(r'^', include(router.urls)),
 ]

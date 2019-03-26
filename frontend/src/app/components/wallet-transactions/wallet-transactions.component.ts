@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Sort } from '@angular/material';
 
 const GROTHS_IN_BEAM = 100000000;
 
@@ -18,7 +19,13 @@ const GROTHS_IN_BEAM = 100000000;
   ],
 })
 export class WalletTransactionsComponent implements OnInit {
+  selectedElem: any;
   displayedColumns: string[] = ['icon', 'date', 'address', 'amount', 'status', 'actions'];
+  transactionOptions = [
+      {num: 1, name: 'copy address'},
+      {num: 2, name: 'cancel'},
+      {num: 3, name: 'delete'}
+  ];
   port: string;
   statuses = [
     {id: 0, name: 'Pending'},
@@ -35,14 +42,50 @@ export class WalletTransactionsComponent implements OnInit {
   ];
 
   wallet_transactions: any = [];
+  sortedData: any = [];
   wallet_status: any;
 
   expandedItem: any;
+
+  @HostListener('document:click', ['$event']) clickout(event) {
+    if (this.selectedElem !== undefined) {
+      this.selectedElem.style['visibility'] = 'hidden';
+    }
+  }
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
 
   constructor(private dataService: DataService,
               private router: Router,
               private route: ActivatedRoute) { }
+
+  showOptions(event) {
+    event.stopPropagation();
+    if (this.selectedElem !== undefined) {
+      this.selectedElem.style['visibility'] = 'hidden';
+    }
+    this.selectedElem = event.srcElement.nextElementSibling;
+    this.selectedElem.style['visibility'] = 'visible';
+  }
+
+  itemOptionChange(event, option, item) {
+    event.stopPropagation();
+    if (this.transactionOptions[0].num === option.num) {
+      const selBox = document.createElement('textarea');
+      selBox.style.position = 'fixed';
+      selBox.style.left = '0';
+      selBox.style.top = '0';
+      selBox.style.opacity = '0';
+      selBox.value = item.receiver;
+      document.body.appendChild(selBox);
+      selBox.focus();
+      selBox.select();
+      document.execCommand('copy');
+      document.body.removeChild(selBox);
+    } else if (this.transactionOptions[1].num === option.num) {
+      this.dataService.txCancel(this.port, item.txId).subscribe((result) => {});
+    }
+    this.selectedElem.style['visibility'] = 'hidden';
+  }
 
   toggleElement(value) {
     const foundElement = this.wallet_transactions.find(elem => elem.item !== undefined && elem.item.txId === value.txId);
@@ -88,8 +131,31 @@ export class WalletTransactionsComponent implements OnInit {
           ];
         this.wallet_transactions.push(item, { detailRow: true, item });
       });
-
+      this.sortedData = this.wallet_transactions.slice();
       this.transactions_loading = false;
     });
+  }
+
+  sortData(sort: Sort) {
+    const data = this.wallet_transactions.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'date': return this.compare(a.create_time, b.create_time, isAsc);
+        case 'address': return this.compare(a.receiver, b.receiver, isAsc);
+        case 'amount': return this.compare(a.value, b.value, isAsc);
+        case 'status': return this.compare(a.status_string, b.status_string, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }

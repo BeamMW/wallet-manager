@@ -5,6 +5,7 @@
     height: 100%;
     min-width: 1000px;
     overflow: auto;
+    font-family: "SFProDisplay", sans-serif !important;
 }
 
 .wallet-title-container {
@@ -142,6 +143,10 @@
     box-shadow: none;
 }
 
+.transactions-table mat-table {
+    overflow: hidden;
+}
+
 .receiving-container {
     grid-column-start: 2;
     grid-column-end: 2;
@@ -167,12 +172,13 @@
 .block-card-content .receiving-container .title,
 .block-card-content .sending-container .title,
 .block-card-content .maturing-container .title{
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
+    text-align: center;
     color: rgba(255, 255, 255, 0.6);
 }
 
@@ -183,8 +189,8 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
+    text-align: center;
     color: #0bccf7;
-    margin-left: 23px;
 }
 .block-card-content .sending-container .value {
     font-size: 20px;
@@ -193,8 +199,8 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
+    text-align: center;
     color: #da68f5;
-    margin-left: 23px;
 }
 
 .block-card-content .maturing-container .value {
@@ -204,8 +210,8 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
+    text-align: center;
     color: #ffffff;
-    margin-left: 23px;
 }
 
 .block-card-content .receiving-container .icon,
@@ -213,17 +219,18 @@
 .block-card-content .maturing-container .icon{
     width: 30px;
     height: 30px;
-    margin-left: 13px;
+    margin-left: 48px;
     margin-top: 13px;
 }
 
-.transactions-table .transactions-table-row:nth-child(n+1){
+.transactions-table .transactions-table-row:nth-child(n){
     background-color: rgb(41,34,54);
 }
 
-.transactions-table .transactions-table-row:nth-child(3n+1){
+.transactions-table .transactions-table-row:nth-child(4n){
     background-color: rgb(52,46,65);
 }
+
 
 .transactions-table .transactions-table-header {
     background-color: rgb(52,46,65);
@@ -236,7 +243,7 @@
 }
 
 .transactions-table-row:not(.expanded) {
-    cursor: pointer;
+    cursor: default;
     border: none;
 }
 
@@ -250,6 +257,13 @@
 
 .table-label {
     color: #ffffff;
+    font-size: 11px;
+}
+
+.table-label.amount,
+.income.amount,
+.outcome.amount{
+    font-size: 18px;
 }
 
 .icon-header,
@@ -273,27 +287,26 @@
 }
 
 .details-table .mat-row {
-    min-height: 10px;
+    min-height: 25px;
 }
 
 .details-table .info-header-row,
 .details-table .mat-header-cell{
-    font-family: Roboto, "SFUIDisplay", sans-serif;
     border: none;
     color: #ffffff;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 11px;
+    font-weight: normal;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
+    min-height: 30px;
 }
 
 .details-table .name-cell {
-    font-family: Roboto, "SFUIDisplay", sans-serif;
     color: #8da1ad;
     max-width: 160px;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
@@ -302,9 +315,8 @@
 }
 
 .details-table .value-cell {
-    font-family: Roboto, "SFUIDisplay", sans-serif;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
@@ -325,3 +337,46 @@
     font-weight: bolder !important;
     color: #ffffff;
 }
+
+.income {
+    color: rgb(14,184,221);
+}
+
+.outcome {
+    color: rgb(218,104,245);
+}
+
+.status-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
+
+.options-selector .options-items {
+    z-index: 10;
+    width: 176px;
+    position: absolute;
+    border-radius: 10px;
+    border: 1px solid rgb(14,184,221);
+    margin-top: 10px;
+    box-sizing: border-box;
+    opacity: 1;
+    right: 15px;
+    background-color: rgb(52,46,65);
+
+}
+
+.options-selector .options-items .item {
+    margin: 14px 0 10px 20px;
+    height: 15px;
+    font-size: 11px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.options-selector .options-items ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
