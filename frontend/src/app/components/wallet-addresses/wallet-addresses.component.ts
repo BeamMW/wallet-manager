@@ -1,8 +1,16 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 const GROTHS_IN_BEAM = 100000000;
+
+export interface DialogData {
+  port: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-wallet-addresses',
   templateUrl: './wallet-addresses.component.html',
@@ -25,6 +33,11 @@ export class WalletAddressesComponent implements OnInit {
   expired_addresses_list: any;
   contacts_list: any;
   wallet_status: any;
+
+  addressId: string;
+  comment: string;
+  expired: string;
+
   @HostListener('document:click', ['$event']) clickout(event) {
     if (this.selectedElem !== undefined) {
       this.selectedElem.style['visibility'] = 'hidden';
@@ -34,7 +47,8 @@ export class WalletAddressesComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    public dialog: MatDialog) { }
 
   showOptions(event) {
     event.stopPropagation();
@@ -48,7 +62,7 @@ export class WalletAddressesComponent implements OnInit {
   itemOptionChange(event, option, item) {
     event.stopPropagation();
     if (this.addressOptions[0].num === option.num) {
-      // edit
+      this.openDialog(item);
     } else if (this.addressOptions[1].num === option.num) {
       this.dataService.deleteAddress(this.port, item.address).subscribe((result) => {
         this.loadAdresses();
@@ -84,5 +98,69 @@ export class WalletAddressesComponent implements OnInit {
     });
 
     this.loadAdresses();
+  }
+
+  openDialog(item) {
+    this.addressId = item.address;
+    this.comment = item.comment;
+    this.expired = item.expired;
+    const dialogRef = this.dialog.open(WalletAddressEditComponent, {
+      width: '250px',
+      data: {addressId: this.addressId, comment: this.comment, expired: this.expired}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        /*this.dataService.addWallet({'name': result.value.name, 'port': result.value.port}).subscribe(() => {
+          this.dataService.loadWalletStatus(result.value.port).subscribe((status) => {
+            status.name = result.value.name;
+            status.port = result.value.port;
+            this.wallets.push(status);
+          },  error => {});
+        });*/
+
+        // TODO: edit address
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'app-wallet-address-edit-dialog',
+  templateUrl: 'wallet-address-edit-dialog.html',
+})
+export class WalletAddressEditComponent implements OnInit {
+  public ownerForm: FormGroup;
+
+  constructor(
+    public dialogRef: MatDialogRef<WalletAddressEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+     ngOnInit() {
+     this.ownerForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      port: new FormControl('', [Validators.required, Validators.maxLength(20)])
+    });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+   public hasError = (controlName: string, errorName: string) => {
+    return this.ownerForm.controls[controlName].hasError(errorName);
+  }
+
+  public createOwner = (ownerFormValue) => {
+    if (this.ownerForm.valid) {
+      this.executeOwnerCreation(ownerFormValue);
+    }
+  }
+
+  private executeOwnerCreation = (ownerFormValue) => {
+    const owner: DialogData = {
+      name: ownerFormValue.name,
+      port: ownerFormValue.port
+    };
   }
 }
