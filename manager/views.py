@@ -56,7 +56,6 @@ def edit_address(request):
                                 'expiration': expiration
                             }})
     result = json.loads(r.text)
-    print(result)
 
     return Response(result['result'], status=HTTP_200_OK)
 
@@ -114,14 +113,13 @@ def tx_send(request):
                             'id': 2,
                             'method': 'tx_send',
                             'params': {
-                                'value': value,
-                                'fee': fee,
+                                'value': int(value),
+                                'fee': int(fee),
                                 'from': from_address,
-                                'address': from_address,
+                                'address': to_address,
                                 'comment': comment
                             }})
     result = json.loads(r.text)
-    print(result)
     return Response(result['result'], status=HTTP_200_OK)
 
 

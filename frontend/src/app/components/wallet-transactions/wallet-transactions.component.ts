@@ -118,7 +118,8 @@ export class WalletTransactionsComponent implements OnInit {
     this.dataService.loadTxList(this.port).subscribe((list) => {
       list.forEach((item) => {
         item.statusName = this.statuses.find(status => status.id === item.status).name;
-        item.value /= GROTHS_IN_BEAM;
+        item.value = item.value < GROTHS_IN_BEAM ? (item.value / GROTHS_IN_BEAM).toFixed(8)
+          : item.value / GROTHS_IN_BEAM;
         item.show = false;
 
         item.tableData = [

@@ -1,7 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 import {DataService} from '../../services/data.service';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
+
+const GROTHS_IN_BEAM = 100000000;
 
 @Component({
   selector: 'app-send',
@@ -25,10 +27,12 @@ export class SendComponent implements OnInit {
   }
 
   sendClicked() {
-    this.dataService.txSend(this.port, this.amountInput.nativeElement.value,
-      this.feeInput.nativeElement.value, '', this.sendToInput.nativeElement.value,
-      this.commentInput.nativeElement.value).subscribe((address) => {
+    this.dataService.createAddress(this.port).subscribe((address) => {
+      this.dataService.txSend(this.port, this.amountInput.nativeElement.value * GROTHS_IN_BEAM,
+      this.feeInput.nativeElement.value, address, this.sendToInput.nativeElement.value,
+      this.commentInput.nativeElement.value).subscribe((result) => {
           this._location.back();
+    });
     });
   }
 
