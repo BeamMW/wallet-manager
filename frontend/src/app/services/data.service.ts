@@ -23,6 +23,14 @@ export class DataService {
     return this.http.get<Wallet[]>(this.API_BASE + '/wallets/', this.HTTP_OPTIONS);
   }
 
+  loadAddressesList(port) {
+    return this.http.get(this.API_BASE + '/get_addr_list/?port=' + port, this.HTTP_OPTIONS);
+  }
+
+  loadContactsList(port) {
+    return this.http.get(this.API_BASE + '/get_contacts_list/?port=' + port, this.HTTP_OPTIONS);
+  }
+
   addWallet(wallet) {
     return this.http.post(this.API_BASE + '/wallets/', JSON.stringify(wallet), this.HTTP_OPTIONS);
   }
@@ -33,6 +41,10 @@ export class DataService {
 
   createAddress(port) {
     return this.http.get(this.API_BASE + '/create_address/?port=' + port);
+  }
+
+  deleteAddress(port, address) {
+    return this.http.get(this.API_BASE + '/delete_address/?port=' + port + '&address=' + address);
   }
 
   editAddress(port, address, expiration, comment) {

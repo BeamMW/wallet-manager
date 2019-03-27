@@ -45,7 +45,6 @@ def edit_address(request):
     address = request.GET['address']
     comment = request.GET['comment']
     expiration = request.GET['expiration']
-    print(address,comment,expiration)
     r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
                       json={'jsonrpc': '2.0',
                             'id': 8,
@@ -54,6 +53,23 @@ def edit_address(request):
                                 'address': address,
                                 'comment': comment,
                                 'expiration': expiration
+                            }})
+    result = json.loads(r.text)
+
+    return Response(result['result'], status=HTTP_200_OK)
+
+
+@api_view(['GET'])
+def delete_address(request):
+    port = request.GET['port']
+    address = request.GET['address']
+
+    r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0',
+                            'id': 8,
+                            'method': 'delete_address',
+                            'params': {
+                                'address': address
                             }})
     result = json.loads(r.text)
 
@@ -85,6 +101,16 @@ def get_addr_list(request):
     port = request.GET['port']
     r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
                       json={'jsonrpc': '2.0', 'id': 8, 'method': 'addr_list', 'params': {'own': True}})
+    result = json.loads(r.text)
+
+    return Response(result['result'], status=HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_contacts_list(request):
+    port = request.GET['port']
+    r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0', 'id': 8, 'method': 'addr_list', 'params': {'own': False}})
     result = json.loads(r.text)
 
     return Response(result['result'], status=HTTP_200_OK)

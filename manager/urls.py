@@ -17,5 +17,7 @@ urlpatterns = [
     url(r'^get_utxo/$', get_utxo),
     url(r'^get_addr_list/$', get_addr_list),
     url(r'^edit_address/$', edit_address),
+    url(r'^delete_address/$', delete_address),
+    url(r'^get_contacts_list/$', get_contacts_list),
     url(r'^', include(router.urls)),
 ]
