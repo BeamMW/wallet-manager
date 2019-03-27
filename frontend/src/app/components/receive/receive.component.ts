@@ -1,6 +1,7 @@
 import { ElementRef, ViewChild, Component, OnInit, HostListener } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../../services/data.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-receive',
@@ -25,7 +26,8 @@ export class ReceiveComponent implements OnInit {
   }
   constructor(private dataService: DataService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private _location: Location) { }
 
   showTypesOptions(event) {
     event.stopPropagation();
@@ -36,6 +38,27 @@ export class ReceiveComponent implements OnInit {
     this.selectedExpireTime = selectedTime;
     this.dataService.editAddress(this.port, this.currentAddress,
         this.selectedExpireTime.value, this.commentInput.nativeElement.value).subscribe((address) => {});
+  }
+
+  closeClicked() {
+    this.dataService.editAddress(this.port, this.currentAddress,
+        this.selectedExpireTime.value, this.commentInput.nativeElement.value).subscribe((address) => {
+          this._location.back();
+    });
+  }
+
+  copyClicked() {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = this.addressInput.nativeElement.value;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
   }
 
   ngOnInit() {

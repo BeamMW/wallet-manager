@@ -22,6 +22,11 @@
     margin: 5px auto;
 }
 
+.send-title {
+    width: 430px;
+    margin: 100px auto 0 auto;
+}
+
 .receive-main-container {
     display: grid;
     margin-top: 20px;
@@ -116,4 +121,50 @@
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.controls-container {
+    display: grid;
+    grid-template-columns: auto 138px 20px 138px auto;
+}
+
+.close-button {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    float: right;
+    height: 38px;
+    margin-top: 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    background-color: rgb(51,86,107);
+    color: #ffffff;
+}
+
+.copy-button {
+    grid-column-start: 4;
+    grid-column-end: 4;
+    float: right;
+    height: 38px;
+    margin-top: 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    background-color: rgb(0,246,210);
+    color: rgb(49,29,69);
+}
+
+.icon-cancel,
+.icon-copy-blue {
+    margin-right: 10px;
 }

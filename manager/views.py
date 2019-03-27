@@ -45,17 +45,18 @@ def edit_address(request):
     address = request.GET['address']
     comment = request.GET['comment']
     expiration = request.GET['expiration']
-
+    print(address,comment,expiration)
     r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
                       json={'jsonrpc': '2.0',
                             'id': 8,
-                            'method': 'addr_list',
+                            'method': 'edit_address',
                             'params': {
                                 'address': address,
                                 'comment': comment,
                                 'expiration': expiration
                             }})
     result = json.loads(r.text)
+    print(result)
 
     return Response(result['result'], status=HTTP_200_OK)
 
@@ -98,6 +99,31 @@ def get_tx_list(request):
     result = json.loads(r.text)
 
     return Response(result['result'], status=HTTP_200_OK)
+
+
+@api_view(['GET'])
+def tx_send(request):
+    port = request.GET['port']
+    fee = request.GET['fee']
+    from_address = request.GET['from']
+    to_address = request.GET['address']
+    comment = request.GET['comment']
+    value = request.GET['value']
+    r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0',
+                            'id': 2,
+                            'method': 'tx_send',
+                            'params': {
+                                'value': value,
+                                'fee': fee,
+                                'from': from_address,
+                                'address': from_address,
+                                'comment': comment
+                            }})
+    result = json.loads(r.text)
+    print(result)
+    return Response(result['result'], status=HTTP_200_OK)
+
 
 @api_view(['GET'])
 def tx_cancel(request):

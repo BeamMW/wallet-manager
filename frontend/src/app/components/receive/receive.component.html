@@ -32,4 +32,15 @@
              type="search" #commentInput id="commentInput"/>
     </div>
   </div>
+  <div class="send-title">Send this address to the sender over an external secure channel</div>
+  <div class="controls-container">
+    <button mat-raised-button (click)="closeClicked()" class="close-button">
+      <img src="../../../assets/img/icon-cancel.svg" class="icon-cancel">
+      close
+    </button>
+    <button mat-raised-button (click)="copyClicked()" class="copy-button">
+      <img src="../../../assets/img/icon-copy-blue.svg" class="icon-copy-blue">
+      copy
+    </button>
+  </div>
 </section>

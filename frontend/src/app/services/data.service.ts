@@ -49,8 +49,13 @@ export class DataService {
   }
 
   txCancel(port, txId) {
-    return this.http.get<Transaction[]>(this.API_BASE + '/tx_list/?port=' + port +
+    return this.http.get<Transaction[]>(this.API_BASE + '/tx_cancel/?port=' + port +
       '&tx_id=' + txId);
+  }
+
+  txSend(port, value, fee, from, address, comment) {
+    return this.http.get<Transaction[]>(this.API_BASE + '/tx_send/?port=' + port +
+      '&value=' + value + '&fee=' + fee + '&from=' + from + '&address=' + address + '&comment=' + comment);
   }
 
   loadUtxo(port) {
