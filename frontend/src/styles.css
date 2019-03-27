@@ -4,5 +4,14 @@
   src: url(assets/fonts/SFUIDisplay.otf) format("opentype");
 }
 
+@font-face {
+  font-family: lato;
+  src: url(assets/fonts/SF-Pro-Display-Light.otf) format("opentype");
+}
+
 html, body { height: 100%; margin: 0;}
-body, div, span, html { font-family: Roboto, "SFUIDisplay", sans-serif; }
+
+* {
+  font-family: SF-Pro-Display-Light , sans-serif;
+}
+
