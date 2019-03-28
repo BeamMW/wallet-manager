@@ -24,7 +24,7 @@ export class DataService {
   }
 
   loadAddressesList(port) {
-    return this.http.get(this.API_BASE + '/get_addr_list/?port=' + port, this.HTTP_OPTIONS);
+    return this.http.get<any[]>(this.API_BASE + '/get_addr_list/?port=' + port, this.HTTP_OPTIONS);
   }
 
   loadContactsList(port) {
