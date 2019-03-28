@@ -8,7 +8,7 @@ export class Transaction implements Deserializable {
   receiver: string;
   sender: string;
   status: number;
-  value: string;
+  value: any;
   height: number;
   confirmations: number;
   statusName: string;
