@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^wallet_status/$', get_wallet_status),
     url(r'^tx_list/$', get_tx_list),
     url(r'^tx_send/$', tx_send),
+    url(r'^tx_swap/$', tx_swap),
     url(r'^tx_cancel/$', tx_cancel),
     url(r'^get_utxo/$', get_utxo),
     url(r'^get_addr_list/$', get_addr_list),

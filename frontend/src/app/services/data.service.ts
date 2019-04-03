@@ -70,6 +70,11 @@ export class DataService {
       '&value=' + value + '&fee=' + fee + '&from=' + from + '&address=' + address + '&comment=' + comment);
   }
 
+  tx_swap(address, amount_beam, amount_btc) {
+    return this.http.get(this.API_BASE + '/tx_swap/?address=' + address +
+      '&amount_beam=' + amount_beam + '&amount_btc=' + amount_btc);
+  }
+
   loadUtxo(port) {
     return this.http.get<Utxo[]>(this.API_BASE + '/get_utxo/?port=' + port);
   }

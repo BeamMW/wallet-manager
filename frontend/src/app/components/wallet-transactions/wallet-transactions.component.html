@@ -70,8 +70,17 @@
           </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="address">
-          <mat-header-cell class="receiver-cell-header" mat-sort-header *matHeaderCellDef> Address </mat-header-cell>
+        <ng-container matColumnDef="from">
+          <mat-header-cell class="receiver-cell-header" mat-sort-header *matHeaderCellDef> From </mat-header-cell>
+          <mat-cell class="cell receiver-cell" *matCellDef="let element">
+            <span class="table-label">
+              {{element.sender}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="to">
+          <mat-header-cell class="receiver-cell-header" mat-sort-header *matHeaderCellDef> To </mat-header-cell>
           <mat-cell class="cell receiver-cell" *matCellDef="let element">
             <span class="table-label">
               {{element.receiver}}
@@ -79,8 +88,21 @@
           </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="amount">
-          <mat-header-cell class="age-cell-header" mat-sort-header *matHeaderCellDef> Amount </mat-header-cell>
+        <ng-container matColumnDef="sent">
+          <mat-header-cell class="age-cell-header" mat-sort-header *matHeaderCellDef> Sent </mat-header-cell>
+          <mat-cell class="cell age-cell" *matCellDef="let element">
+            <span class="income amount" *ngIf="element.income">+ </span>
+            <span class="outcome amount" *ngIf="!element.income">- </span>
+            <span class="table-label amount"
+                [class.income]="element.income"
+                [class.outcome]="!element.income">
+              {{element.value}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="received">
+          <mat-header-cell class="age-cell-header" mat-sort-header *matHeaderCellDef> Received </mat-header-cell>
           <mat-cell class="cell age-cell" *matCellDef="let element">
             <span class="income amount" *ngIf="element.income">+ </span>
             <span class="outcome amount" *ngIf="!element.income">- </span>

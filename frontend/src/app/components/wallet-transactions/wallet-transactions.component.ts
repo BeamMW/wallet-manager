@@ -20,7 +20,7 @@ const GROTHS_IN_BEAM = 100000000;
 })
 export class WalletTransactionsComponent implements OnInit {
   selectedElem: any;
-  displayedColumns: string[] = ['icon', 'date', 'address', 'amount', 'status', 'actions'];
+  displayedColumns: string[] = ['icon', 'date', 'from', 'to', 'sent', 'received', 'status', 'actions'];
   transactionOptions = [
       {num: 1, name: 'copy address'},
       {num: 2, name: 'cancel'},
@@ -101,11 +101,7 @@ export class WalletTransactionsComponent implements OnInit {
     this.router.navigate(['wallet/' + this.port + '/send']);
   }
 
-  ngOnInit() {
-    this.status_loading = true;
-    this.transactions_loading = true;
-    this.port = this.route.snapshot.parent.params.port;
-
+  update() {
     this.dataService.loadWalletStatus(this.port).subscribe((status) => {
       this.wallet_status = status;
       this.wallet_status.available /= GROTHS_IN_BEAM;
@@ -135,6 +131,15 @@ export class WalletTransactionsComponent implements OnInit {
       this.sortedData = this.wallet_transactions.slice();
       this.transactions_loading = false;
     });
+  }
+
+  ngOnInit() {
+    this.status_loading = true;
+    this.transactions_loading = true;
+    this.port = this.route.snapshot.parent.params.port;
+
+    this.update();
+    setInterval(this.update.bind(this), 10000);
   }
 
   sortData(sort: Sort) {

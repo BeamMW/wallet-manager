@@ -6,8 +6,9 @@ import {WalletAddressesComponent} from './components/wallet-addresses/wallet-add
 import {WalletTransactionsComponent} from './components/wallet-transactions/wallet-transactions.component';
 import {WalletManagerComponent} from './components/wallet-manager/wallet-manager.component';
 import {WalletComponent} from './components/wallet/wallet.component';
-import {SendComponent} from './components/send/send.component';
 import {ReceiveComponent} from './components/receive/receive.component';
+import {SendComponent} from './components/send/send.component';
+import {SendSwapComponent} from './components/send-swap/send-swap.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
       component: WalletUtxoComponent
     }, {
       path: 'send',
-      component: SendComponent
+      component: SendSwapComponent
     }, {
       path: 'receive',
       component: ReceiveComponent

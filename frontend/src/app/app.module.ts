@@ -33,6 +33,7 @@ import { WalletTransactionsComponent } from './components/wallet-transactions/wa
 import { WalletManagerComponent, WalletManagerDialogComponent } from './components/wallet-manager/wallet-manager.component';
 import { ReceiveComponent } from './components/receive/receive.component';
 import { SendComponent } from './components/send/send.component';
+import { SendSwapComponent } from './components/send-swap/send-swap.component';
 
 @NgModule({
   entryComponents: [
@@ -50,7 +51,8 @@ import { SendComponent } from './components/send/send.component';
     WalletManagerDialogComponent,
     WalletAddressEditComponent,
     ReceiveComponent,
-    SendComponent
+    SendComponent,
+    SendSwapComponent
   ],
   imports: [
     BrowserModule,

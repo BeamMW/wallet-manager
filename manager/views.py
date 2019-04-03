@@ -4,6 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework.status import HTTP_200_OK
 from rest_framework import viewsets
 
+import subprocess
+import getpass
 import requests
 import json
 
@@ -147,6 +149,25 @@ def tx_send(request):
                             }})
     result = json.loads(r.text)
     return Response(result['result'], status=HTTP_200_OK)
+
+
+@api_view(['GET'])
+def tx_swap(request):
+    address = request.GET['address']
+    amount_beam = request.GET['amount_beam']
+    amount_btc = request.GET['amount_btc']
+    username = input('Enter BTC username: ')
+    pswd = getpass.getpass('Enter BTC password:')
+    subprocess.call("beam-wallet --wallet_path=\"wallet.db\" "
+                    "-n eu-node01.masternet.beam.mw:8100 swap_coins "
+                    "--amount " + amount_beam + " --fee 100 "
+                    "-r " + address +
+                    " --swap_amount " + amount_btc +
+                    " --swap_beam_side "
+                    "--btc_node_addr 127.0.0.1:13300 "
+                    "--btc_pass " + pswd +
+                    " --btc_user " + username, shell=True)
+    return Response('ok', status=HTTP_200_OK)
 
 
 @api_view(['GET'])
