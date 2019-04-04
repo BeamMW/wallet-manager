@@ -10,7 +10,7 @@
 
 .wallet-title-container {
     display: grid;
-    grid-template-columns: 30px auto 138px 20px 138px 30px;
+    grid-template-columns: 30px auto 138px 20px 138px 20px 138px 30px;
 }
 
 .wallet-title-element {
@@ -58,6 +58,24 @@
     background-color: rgb(218,104,245);
 }
 
+.swap-button {
+    grid-column-start: 7;
+    grid-column-end: 7;
+    float: right;
+    height: 38px;
+    margin-top: 67px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    background-color: rgb(0,246,210);
+}
+
+.icon-swap,
 .icon-receive-blue,
 .icon-send-blue {
     margin-right: 15px;

@@ -4,6 +4,7 @@ import {DataService} from '../../services/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 const GROTHS_IN_BEAM = 100000000;
+const SAT_IN_BTC = 100000000;
 
 @Component({
   selector: 'app-send-swap',
@@ -31,16 +32,27 @@ export class SendSwapComponent implements OnInit {
 
   sendClicked() {
     this.dataService.tx_swap(this.sendToInput.nativeElement.value, this.amountInput.nativeElement.value,
-        this.amountBtcInput.nativeElement.value).subscribe((result) => {
+        this.amountBtcInput.nativeElement.value * SAT_IN_BTC).subscribe((result) => {
           this._location.back();
     });
+  }
+
+  inputFocusOut(e) {
+     if (e.target.value.length > 0) {
+       e.target.style.width = ((e.target.value.length + 1) * 25) + 'px';
+     } else {
+       e.target.style.width = '30px';
+     }
+  }
+
+  inputKeypress(e) {
+    e.target.style.width = ((e.target.value.length + 1) * 25) + 'px';
   }
 
   ngOnInit() {
     this.port = this.route.snapshot.parent.params.port;
     this.feeInput.nativeElement.value = 10;
-    this.amountInput.nativeElement.value = 1;
-    this.amountBtcInput.nativeElement.value = 10;
-    this.sendToInput.nativeElement.value = '2790301e6c320382679e67712d7b31d743b3dcbef8ce7abfb7537135d11d4d4bb4f';
+    this.amountInput.nativeElement.value = 0;
+    this.amountBtcInput.nativeElement.value = 0;
   }
 }

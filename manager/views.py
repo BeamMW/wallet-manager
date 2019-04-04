@@ -156,18 +156,16 @@ def tx_swap(request):
     address = request.GET['address']
     amount_beam = request.GET['amount_beam']
     amount_btc = request.GET['amount_btc']
-    username = input('Enter BTC username: ')
-    pswd = getpass.getpass('Enter BTC password:')
     subprocess.call("beam-wallet --wallet_path=\"wallet.db\" "
                     "-n eu-node01.masternet.beam.mw:8100 swap_coins "
-                    "--amount " + amount_beam + " --fee 100 "
+                    " --amount " + amount_beam + " --fee 100 "
                     "-r " + address +
-                    " --swap_amount " + amount_btc +
+                    " --pass=123 --swap_amount " + amount_btc +
                     " --swap_beam_side "
                     "--btc_node_addr 127.0.0.1:13300 "
-                    "--btc_pass " + pswd +
-                    " --btc_user " + username, shell=True)
-    return Response('ok', status=HTTP_200_OK)
+                    "--btc_pass 123 "
+                    "--btc_user Alice", shell=True)
+    return Response('Completed successfully', status=HTTP_200_OK)
 
 
 @api_view(['GET'])

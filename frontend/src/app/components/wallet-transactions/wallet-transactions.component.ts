@@ -20,7 +20,7 @@ const GROTHS_IN_BEAM = 100000000;
 })
 export class WalletTransactionsComponent implements OnInit {
   selectedElem: any;
-  displayedColumns: string[] = ['icon', 'date', 'from', 'to', 'sent', 'received', 'status', 'actions'];
+  displayedColumns: string[] = ['icon', 'date', 'from', 'to', 'sent', 'status', 'actions'];
   transactionOptions = [
       {num: 1, name: 'copy address'},
       {num: 2, name: 'cancel'},
@@ -101,6 +101,10 @@ export class WalletTransactionsComponent implements OnInit {
     this.router.navigate(['wallet/' + this.port + '/send']);
   }
 
+  swapClicked() {
+    this.router.navigate(['wallet/' + this.port + '/swap']);
+  }
+
   update() {
     this.dataService.loadWalletStatus(this.port).subscribe((status) => {
       this.wallet_status = status;
@@ -112,6 +116,8 @@ export class WalletTransactionsComponent implements OnInit {
     });
 
     this.dataService.loadTxList(this.port).subscribe((list) => {
+      this.wallet_transactions = [];
+      this.sortedData = [];
       list.forEach((item) => {
         item.statusName = this.statuses.find(status => status.id === item.status).name;
         item.value = item.value < GROTHS_IN_BEAM ? (item.value / GROTHS_IN_BEAM).toFixed(8)

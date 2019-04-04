@@ -27,6 +27,9 @@ const routes: Routes = [
       component: WalletUtxoComponent
     }, {
       path: 'send',
+      component: SendComponent
+    }, {
+      path: 'swap',
       component: SendSwapComponent
     }, {
       path: 'receive',

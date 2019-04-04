@@ -9,6 +9,10 @@
       <img src="../../../assets/img/icon-send-blue.png" class="icon-send-blue">
       send
     </button>
+    <button mat-raised-button (click)="swapClicked()" class="swap-button">
+      <img src="../../../assets/img/icon-swap.svg" class="icon-swap">
+      swap
+    </button>
   </div>
 
   <div class="status-cards-container" *ngIf="!status_loading">
