@@ -13,7 +13,7 @@
     <div class="amount-items">
       <div>Send</div>
       <input autocomplete="off" type="text" #amountInput
-             />
+             (focusout)="inputFocusOut($event)" (keypress)="inputKeypress($event)"/>
       <span style="color: rgb(218,104,245); font-size: 24px;">BEAM</span>
     </div>
 
