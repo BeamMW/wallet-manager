@@ -20,7 +20,7 @@ const GROTHS_IN_BEAM = 100000000;
 })
 export class WalletTransactionsComponent implements OnInit {
   selectedElem: any;
-  displayedColumns: string[] = ['icon', 'date', 'from', 'to', 'sent', 'status', 'actions'];
+  displayedColumns: string[] = ['icon', 'date', 'to', 'sent', 'status', 'actions'];
   transactionOptions = [
       {num: 1, name: 'copy address'},
       {num: 2, name: 'cancel'},
