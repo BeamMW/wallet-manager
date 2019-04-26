@@ -238,3 +238,19 @@ def tx_cancel(request):
     result = json.loads(r.text)
 
     return Response(result['result'], status=HTTP_200_OK)
+
+
+@api_view(['GET'])
+def tx_delete(request):
+    port = request.GET['port']
+    tx_id = request.GET['tx_id']
+    r = requests.post(WALLET_API_URL + port + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0',
+                            'id': 4,
+                            'method': 'tx_delete',
+                            'params': {
+                                'txId': tx_id
+                            }})
+    result = json.loads(r.text)
+
+    return Response(result['result'], status=HTTP_200_OK)

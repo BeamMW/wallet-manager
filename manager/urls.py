@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^tx_send/$', tx_send),
     url(r'^tx_swap/$', tx_swap),
     url(r'^tx_cancel/$', tx_cancel),
+    url(r'^tx_delete/$', tx_delete),
     url(r'^get_utxo/$', get_utxo),
     url(r'^get_addr_list/$', get_addr_list),
     url(r'^edit_address/$', edit_address),

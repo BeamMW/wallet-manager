@@ -65,6 +65,11 @@ export class DataService {
       '&tx_id=' + txId);
   }
 
+  txDelete(port, txId) {
+    return this.http.get<Transaction[]>(this.API_BASE + '/tx_delete/?port=' + port +
+      '&tx_id=' + txId);
+  }
+
   txSend(port, value, fee, from, address, comment) {
     return this.http.get(this.API_BASE + '/tx_send/?port=' + port +
       '&value=' + value + '&fee=' + fee + '&from=' + from + '&address=' + address + '&comment=' + comment);

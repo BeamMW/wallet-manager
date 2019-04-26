@@ -82,7 +82,13 @@ export class WalletTransactionsComponent implements OnInit {
       document.execCommand('copy');
       document.body.removeChild(selBox);
     } else if (this.transactionOptions[1].num === option.num) {
-      this.dataService.txCancel(this.port, item.txId).subscribe((result) => {});
+      this.dataService.txCancel(this.port, item.txId).subscribe((result) => {
+        this.update();
+      });
+    } else if (this.transactionOptions[2].num === option.num) {
+      this.dataService.txDelete(this.port, item.txId).subscribe((result) => {
+        this.update();
+      });
     }
     this.selectedElem.style['visibility'] = 'hidden';
   }
