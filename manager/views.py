@@ -17,6 +17,8 @@ import os
 import signal
 import psutil
 
+from psutil import NoSuchProcess
+
 from .models import *
 from .serializers import *
 
@@ -147,31 +149,32 @@ def get_tx_list(request):
         stream = io.BytesIO(result)
         result = JSONParser().parse(stream)
 
-    current_process = psutil.Process()
-    children = current_process.children()
-    added = _redis.get('added')
-
-    if added is None:
-        _redis.set('added_time', datetime.datetime.now().timestamp())
-
-    if len(children) == 1:
-        result.insert(0, {"comment": "",
-                          "create_time": _redis.get('added_time'),
-                          "fee": 10,
-                          "income": False,
-                          "kernel": "",
-                          "receiver": _redis.get('receiver'),
-                          "sender": "1",
-                          "status": 3,
-                          "status_string": "swapping",
-                          "txId": "",
-                          "value": 100000000})
-        _redis.set('added', 'inserted')
-    elif len(children) == 0 and added == 'inserted':
-        _redis.delete('added')
-        _redis.delete('added_time')
-        subprocess.Popen('wallet-api --node_addr=eu-node01.masternet.beam.mw:8100 --pass=123 --use_http=1',
-                         shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+    is_added = _redis.exists("added")
+    if _redis.exists("process_id"):
+        try:
+            if is_added == 0:
+                _redis.set('added_time', datetime.datetime.now().timestamp())
+            psutil.Process(pid=int(_redis.get("process_id").decode('utf-8')))
+            result.insert(0, {"comment": "",
+                              "create_time": _redis.get('added_time'),
+                              "fee": 10,
+                              "income": False,
+                              "kernel": "",
+                              "receiver": _redis.get('receiver'),
+                              "sender": "1",
+                              "status": 3,
+                              "status_string": "swapping",
+                              "txId": "",
+                              "value": 100000000})
+            _redis.set('added', 1)
+        except NoSuchProcess:
+            if is_added == 1:
+                _redis.delete('receiver')
+                _redis.delete('added')
+                _redis.delete('added_time')
+                _redis.delete("process_id")
+                subprocess.Popen('wallet-api --node_addr=eu-node01.masternet.beam.mw:8100 --pass=123 --use_http=1',
+                                 shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
     return Response(result, status=HTTP_200_OK)
 
 
@@ -210,10 +213,8 @@ def tx_swap(request):
         if "wallet-api".lower() in proc.name().lower():
             pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
 
-    _redis.delete('added')
-    _redis.delete('added_time')
     os.kill(int(pinfo['pid']), signal.SIGTERM)  # or signal.SIGKILL
-    subprocess.Popen("beam-wallet --wallet_path=\"wallet.db\" "
+    process = subprocess.Popen("beam-wallet --wallet_path=\"wallet.db\" "
                     "-n eu-node01.masternet.beam.mw:8100 swap_coins "
                     "--amount " + amount_beam + " --fee 100 -r " + address +
                     " --pass=123 --swap_amount " + amount_btc +
@@ -221,6 +222,7 @@ def tx_swap(request):
                     "--btc_pass 123 --btc_user Alice",
                     shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
 
+    _redis.set("process_id", str(process.pid))
     return Response('Completed successfully', status=HTTP_200_OK)
 
 
