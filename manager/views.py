@@ -223,7 +223,67 @@ def tx_swap(request):
                     shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
 
     _redis.set("process_id", str(process.pid))
-    return Response('Completed successfully', status=HTTP_200_OK)
+    return Response('Completed successfully', status=HTTP_200_OK)@api_view(['GET'])
+
+
+@api_view(['GET'])
+def tx_swap_by_api(request):
+    port = request.GET['port']
+    address = request.GET['address']
+    amount_beam = request.GET['amount_beam']
+    amount_btc = request.GET['amount_btc']
+    fee = request.GET['fee']
+
+    r = requests.post(WALLET_API_URL + '10000' + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0',
+                            'id': 123,
+                            'method': 'start_swap',
+                            'params': {
+                                'amount': int(amount_beam),
+                                'fee': int(fee),
+                                'swapAmount': int(amount_btc),
+                                'beamSide': True,
+                                'address': address
+                            }})
+
+    requests.post(WALLET_API_URL + '10001' + WALLET_API_PATH,
+                  json={'jsonrpc': '2.0',
+                        'id': 123,
+                        'method': 'accept_swap',
+                        'params': {
+                            'amount': int(amount_beam),
+                            'swapAmount': int(amount_btc),
+                            'beamSide': False
+                        }})
+    result = json.loads(r.text)
+
+    return Response('', status=HTTP_200_OK)
+
+
+@api_view(['GET'])
+def tx_swap_init(request):
+
+    requests.post(WALLET_API_URL + '10000' + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0',
+                            'id': 123,
+                            'method': 'init_bitcoin',
+                            'params': {
+                                'btcUserName': 'Alice',
+                                'btcPass': '123',
+                                'btcNodeAddr': '127.0.0.1:13300'
+                            }})
+
+    requests.post(WALLET_API_URL + '10001' + WALLET_API_PATH,
+                      json={'jsonrpc': '2.0',
+                            'id': 123,
+                            'method': 'init_bitcoin',
+                            'params': {
+                                'btcUserName': 'Bob',
+                                'btcPass': '123',
+                                'btcNodeAddr': '127.0.0.1:13400'
+                            }})
+
+    return Response('', status=HTTP_200_OK)
 
 
 @api_view(['GET'])

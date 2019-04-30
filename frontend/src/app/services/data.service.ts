@@ -75,9 +75,14 @@ export class DataService {
       '&value=' + value + '&fee=' + fee + '&from=' + from + '&address=' + address + '&comment=' + comment);
   }
 
-  tx_swap(address, amount_beam, amount_btc) {
+  tx_swap(port, fee, address, amount_beam, amount_btc) {
     return this.http.get(this.API_BASE + '/tx_swap/?address=' + address +
-      '&amount_beam=' + amount_beam + '&amount_btc=' + amount_btc);
+      '&amount_beam=' + amount_beam + '&amount_btc=' + amount_btc +
+      '&port=' + port + '&fee=' + fee);
+  }
+
+  tx_swap_init() {
+    return this.http.get(this.API_BASE + '/tx_swap_init/');
   }
 
   loadUtxo(port) {

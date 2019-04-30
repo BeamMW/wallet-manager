@@ -31,8 +31,10 @@ export class SendSwapComponent implements OnInit {
   }
 
   sendClicked() {
-    this.dataService.tx_swap(this.sendToInput.nativeElement.value, this.amountInput.nativeElement.value,
-        this.amountBtcInput.nativeElement.value * SAT_IN_BTC).subscribe((result) => {
+    this.dataService.tx_swap(this.port, this.feeInput.nativeElement.value,
+      this.sendToInput.nativeElement.value,
+      this.amountInput.nativeElement.value * GROTHS_IN_BEAM,
+      this.amountBtcInput.nativeElement.value * SAT_IN_BTC).subscribe((result) => {
           this._location.back();
     });
   }

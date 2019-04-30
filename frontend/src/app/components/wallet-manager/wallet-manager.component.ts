@@ -63,6 +63,10 @@ export class WalletManagerComponent implements OnInit {
   ngOnInit() {
     this.wallets = [];
 
+    this.dataService.tx_swap_init().subscribe(() => {
+      console.log('wallets ready to swapping');
+    });
+
     this.dataService.loadWalletsList().subscribe((list) => {
       list.map((item) => {
         this.dataService.loadWalletStatus(item.port).subscribe((status) => {
