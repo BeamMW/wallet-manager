@@ -151,7 +151,7 @@ export class WalletTransactionsComponent implements OnInit {
     this.port = this.route.snapshot.parent.params.port;
 
     this.update();
-    // setInterval(this.update.bind(this), 10000);
+    setInterval(this.update.bind(this), 10000);
   }
 
   sortData(sort: Sort) {

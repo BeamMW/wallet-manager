@@ -262,26 +262,27 @@ def tx_swap_by_api(request):
 
 @api_view(['GET'])
 def tx_swap_init(request):
+    if not _redis.exists("initiated"):
+        requests.post(WALLET_API_URL + '10000' + WALLET_API_PATH,
+                          json={'jsonrpc': '2.0',
+                                'id': 123,
+                                'method': 'init_bitcoin',
+                                'params': {
+                                    'btcUserName': 'Alice',
+                                    'btcPass': '123',
+                                    'btcNodeAddr': '127.0.0.1:13300'
+                                }})
 
-    requests.post(WALLET_API_URL + '10000' + WALLET_API_PATH,
-                      json={'jsonrpc': '2.0',
-                            'id': 123,
-                            'method': 'init_bitcoin',
-                            'params': {
-                                'btcUserName': 'Alice',
-                                'btcPass': '123',
-                                'btcNodeAddr': '127.0.0.1:13300'
-                            }})
-
-    requests.post(WALLET_API_URL + '10001' + WALLET_API_PATH,
-                      json={'jsonrpc': '2.0',
-                            'id': 123,
-                            'method': 'init_bitcoin',
-                            'params': {
-                                'btcUserName': 'Bob',
-                                'btcPass': '123',
-                                'btcNodeAddr': '127.0.0.1:13400'
-                            }})
+        requests.post(WALLET_API_URL + '10001' + WALLET_API_PATH,
+                          json={'jsonrpc': '2.0',
+                                'id': 123,
+                                'method': 'init_bitcoin',
+                                'params': {
+                                    'btcUserName': 'Bob',
+                                    'btcPass': '123',
+                                    'btcNodeAddr': '127.0.0.1:13400'
+                                }})
+        _redis.set('initiated', 1)
 
     return Response('', status=HTTP_200_OK)
 

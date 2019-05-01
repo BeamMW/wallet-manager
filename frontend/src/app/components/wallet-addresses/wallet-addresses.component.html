@@ -8,7 +8,7 @@
         <div class="utxo-table">
           <mat-table matSort *ngIf="!addresses_loading" [dataSource]="active_addresses_list" class="mat-elevation-z8">
             <ng-container matColumnDef="comment">
-              <mat-header-cell class="height-cell-date" *matHeaderCellDef> Comment </mat-header-cell>
+              <mat-header-cell class="comment-cell-header" *matHeaderCellDef> Comment </mat-header-cell>
               <mat-cell class="comment-cell" *matCellDef="let element">
                 <span class="table-label">
 
