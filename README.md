@@ -12,6 +12,8 @@ Requirements:
 ## Backend:
 - Install [Python 3.6 version](https://www.python.org/downloads/release/python-360/). Make sure that C:\Program Files (x86)\Python36-32; and C:\Program Files (x86)\Python36-32\Scripts; is part of your PATH.
 
+- Install Redis
+
 - Install vitrualenv to create individual environment
 
 
