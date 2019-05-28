@@ -15,54 +15,43 @@ Requirements:
 - Install Redis
 
 - Install vitrualenv to create individual environment
-
-
-    pip install virtualenv
+```
+pip install virtualenv
+```
 - Create enviroment:
-
-
-    mkdir C:\virtualenv
-
-    cd C:\virtualenv
-
-    virtualenv wallet-manager
-
+```
+mkdir C:\virtualenv
+cd C:\virtualenv
+virtualenv wallet-manager
+```
 - Activate enviroment
-
-
-    C:\virtualenv\wallet-manager\Scripts\activate
-
+```
+C:\virtualenv\wallet-manager\Scripts\activate
+```
 - Clone repository
-
-
-    cd C:\
-
-    git clone https://github.com/BeamMW/wallet-manager.git
-
+```
+cd C:\
+git clone https://github.com/BeamMW/wallet-manager.git
+```
 - Install requirements
-
-
-    cd wallet-manager
-
-    pip install -r requirements.txt
-    
-    python manage.py makemigrations
-
-    python manage.py migrate
+```
+cd wallet-manager
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+```
 
 - Run server
+```
+python manage.py runserver
+```
 
-
-    python manage.py runserver
-    
 ## Frontend:
-
-    cd C:/wallet-manager/frontend
-    
-    npm install
-    
-    ng serve
-    
+```
+cd C:/wallet-manager/frontend
+npm install
+ng serve
+```
 ## Wallet api
 
 - Download wallet api
@@ -70,11 +59,9 @@ Requirements:
 - Extract api to wallet folder
 
 - Run api
-
-   
-    cd path to wallet
-    
-    wallet-api --node_addr=eu-nodes.testnet.beam.mw:8100 --pass=123 --use_http=1  --port=10000
-
+```
+cd path to wallet
+wallet-api --node_addr=eu-nodes.testnet.beam.mw:8100 --pass=123 --use_http=1  --port=10000
+```
 
 ### Wallet can be added to the manager using the port of the running wallet API
