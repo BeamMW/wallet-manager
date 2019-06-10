@@ -5,7 +5,7 @@ Requirements:
 1. Beam wallet api
 2. Redis
 3. Python Django 2 (backend)
-5. Angular 7 with Angular Material (frontend)
+4. Angular 7 with Angular Material (frontend)
 
 # Running Beam Wallet manager on local machine (Windows)
 
